@@ -1,0 +1,22 @@
+meteor@1.9.0                  # Shared foundation for all Meteor packages
+static-html             # Define static page content in .html files
+standard-minifier-css@1.4.1   # CSS minifier run for production mode
+standard-minifier-js@2.3.4    # JS minifier run for production mode
+es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers
+ecmascript@0.11.1              # Enable ECMAScript2015+ syntax in app code
+shell-server@0.3.1            # Server-side component of the `meteor shell` command
+webapp@1.6.0                  # Serves a Meteor app over HTTP
+server-render@0.3.1           # Support for server-side rendering
+react-meteor-data
+mongo
+accounts-ui
+accounts-password
+twbs:bootstrap@3.3.6
+fortawesome:fontawesome
+meteor-base@1.4.0
+spacebars@1.0.12
+reactive-var@1.0.11
+session@1.1.7
+jquery@1.11.10
+stylus@=2.513.14
+email@1.2.3

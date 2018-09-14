@@ -1,0 +1,25 @@
+.om-led-red {
+	margin: 0 auto;
+	width: 8px;
+	height: 8px;
+	background-color: #F00;
+	border-radius: 50%;
+}
+.om-led-green {
+	margin: 0 auto;
+	width: 8px;
+	height: 8px;
+	background-color: #ABFF00;
+	border-radius: 50%;
+}
+.online_status i, .online_status img {
+	font-size: 25px;
+	position: absolute;
+	right: 15px;
+	top: 5px;
+	color: rgb(255, 255, 255);
+}
+
+.online_status i{
+	top:10px;
+}

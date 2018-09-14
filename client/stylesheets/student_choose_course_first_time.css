@@ -1,0 +1,376 @@
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #a3a3a3;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+        color: #B0FE76;
+    }
+    .navbar-default .left_menu .dropdown-menu {
+        margin-top: 0;
+    }
+}
+
+.navbar-nav > li {
+    padding-right: 15px;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav > li {  
+        padding-right: 0;
+    }
+}
+
+.navbar-nav > li:last-child {
+    padding-right: 0;
+}
+
+@media (max-width: 991px) {
+    .navbar-default .navbar-nav li a {
+        font-size: 14px;
+    }
+}
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+    color: #B0FE76;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
+    color: #B0FE76;
+    background-color: transparent;
+}
+
+.rating {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    left: 0;
+}
+
+.rating ul {
+    padding: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.rating ul li {
+    display: inline-block;
+}
+
+span.progress_bar {
+    position: absolute;
+    width: 170px;
+    height: 5px;
+    background: #ebebeb;
+}
+
+@media (max-width: 1200px) {
+    span.progress_bar {
+        width: 130px;
+    }
+}
+
+@media (max-width: 992px) {
+    span.progress_bar {
+        width: 100px;
+    }
+}
+
+span.progress_bar:before {
+    content: '';
+    position: absolute;
+    background: red;
+    width: 130px;
+    height: 5px;
+    background: #b549c6;
+}
+
+@media (max-width: 1200px) {
+    span.progress_bar:before {
+        width: 80px;
+    }
+}
+
+@media (max-width: 992px) {
+    span.progress_bar:before {
+        width: 50px;
+    }
+}
+
+body {
+    background: #e7ecef;
+    font-family: "Roboto", sans-serif;
+}
+
+h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #8c9ba2;
+}
+
+
+/* Sidebar */
+
+.exam_main_list_wrapper {
+    margin-top: 60px;
+}
+
+.exam_main_list_wrapper h3 {
+    margin: 0 0 30px 0;
+    color: #fff;
+}
+
+.exam_main_list_wrapper .exam_lists {
+    background: #fff;
+    padding: 10px 15px 11px 15px;
+    position: relative;
+    -webkit-box-shadow: 1px 10px 0px 0px rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 1px 10px 0px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: 1px 0px 10px 0px rgba(0, 0, 0, 0.14);
+    margin-bottom: 30px;
+}
+
+.exam_main_list_wrapper .exam_lists .side_progress {
+    position: absolute;
+    content: '';
+    background: #b549c6;
+    height: 10px;
+    top: 0;
+    left: 0;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details {
+    margin-top: 10px;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .logo {
+    text-align: center;
+    width: 65px;
+    height: 65px;
+    background: #b549c6;
+    border-radius: 50%;
+    float: left;
+    display: inline-block;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .logo img {
+    position: relative;
+    top: 22px;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .exam_desc {
+    display: inline-block;
+    position: relative;
+    margin-left: 18px;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .exam_desc h3 {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    margin: 8px 0 5px 0;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .exam_desc h3 a {
+    font-family: "Roboto", sans-serif;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .info_wrap {
+    font-family: "Roboto", sans-serif;
+    margin-top: 10px;
+}
+
+.exam_main_list_wrapper .exam_lists .exam_details .info_wrap .info_desc p {
+    margin: 10px 0 15px 0;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion h4 {
+    margin-top: 38px;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 12px;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion .course_competion_progress .list {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion .course_competion_progress .list .title {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    display: inline-block;
+    color: #000;
+    width: 55px;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion .course_competion_progress .list .progress_info {
+    display: inline-block;
+    width: 170px;
+    height: 5px;
+    background: #ebebeb;
+    margin-right: 10px;
+    position: relative;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion .course_competion_progress .list .progress_info .progress_value {
+    position: absolute;
+    background: #9ccf63;
+    height: 5px;
+}
+
+.exam_main_list_wrapper .exam_lists .course_completion .course_competion_progress .list span {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    display: inline-block;
+    color: #000;
+}
+
+.exam_main_list_wrapper .exam_lists .activity {
+    margin-top: 45px;
+}
+
+.exam_main_list_wrapper .exam_lists .activity h4 {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #8c9ba1;
+}
+
+.exam_main_list_wrapper .exam_lists .chart_container {
+    margin-top: 15px;
+}
+
+@media (max-width: 1200px) {
+    .exam_main_list_wrapper .exam_lists .chart_container #Chart {
+        width: 200px !important;
+        height: 150px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .exam_main_list_wrapper .exam_lists .chart_container #Chart {
+        width: 180px !important;
+        height: 100px !important;
+    }
+}
+
+.exam_main_list_wrapper .exam_lists .arrow_click {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.exam_main_list_wrapper .subscribed_course {
+    font-size: 14px;
+    color: #5d5829;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #ffe384;
+    padding: 8px 35px;
+    -webkit-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    text-align: center;
+    position: relative;
+    margin: 0 -15px;
+    top: 18px;
+    display: block;
+}
+
+.exam_main_list_wrapper .exam_lists .arrow_click img {
+    cursor: pointer;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.exam_main_list_wrapper .exam_lists .arrow_click .rotate {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.exam_main_list_wrapper .add_course_lists {
+    border: 4px dashed #fff;
+    border-radius: 4px;
+    text-align: center;
+    padding: 45px 0 25px 0;
+}
+
+.exam_main_list_wrapper .add_course_lists a {
+    text-decoration: none;
+}
+
+.exam_main_list_wrapper .add_course_lists a h5 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 32px;
+    color: #fff;
+}
+
+.exam_main_list_wrapper .add_course_lists h5 a {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 32px;
+    color: #fff;
+}
+
+.exam_main_list_wrapper .add_course_lists h5 a.hideCourse {
+    display: block;
+    margin: 20px 0 40px 0;
+}
+
+.col-sm-3:nth-child(2) .exam_lists .side_progress {
+    background: #10829c;
+}
+
+.col-sm-3:nth-child(2) .exam_details .logo {
+    background: #10829c;
+}
+
+.subscribe_cbtn {
+    margin: 0 auto;
+    background: transparent;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    color: #444444;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 0;
+    display: block;
+    text-transform: uppercase;
+    box-shadow: none;
+    border: none;
+}
+
+.subscribe_btn_wrap {
+    border-top: 1px solid #E0E0E0;
+    display: block;
+    padding-top: 10px;
+}
