@@ -10,7 +10,6 @@ export const renderRoutes = () => (
   <Router history={browserHistory}>
     <Switch>
       <Route exact path="/" component={App}/>
-      <Route exact path="/welcome" component={App}/>
     </Switch>
   </Router>
 );

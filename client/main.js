@@ -12,4 +12,4 @@ Meteor.startup(() => {
     	}
   	});
 	render(renderRoutes(), document.getElementById('render-target'));
-})
+});
