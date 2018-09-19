@@ -135,10 +135,10 @@ export default withTracker(() =>{
 		Meteor.call('courseMapStructure', userCourseMap.findOne().course_map_id, function(err, res){
 			if(res){
 				studentCourseObj.set(new StudentCourseClass(Meteor.userId(), Meteor.user().profile.default_course, res));
-				coursePerformance.set({
-					gold: _.range(0,studentCourseObj.get().starsGained()),
-					black : _.range(0, studentCourseObj.get().maxNoOfStars() - studentCourseObj.get().starsGained())
-				});
+				// coursePerformance.set({
+				// 	gold: _.range(0,studentCourseObj.get().starsGained()),
+				// 	black : _.range(0, studentCourseObj.get().maxNoOfStars() - studentCourseObj.get().starsGained())
+				// });
 				tagWiseCompletion.set(studentCourseObj.get().tagWiseCompletion);
 			}
 		});
