@@ -11,5 +11,5 @@ Meteor.startup(() => {
       		Meteor.settings.public = res.public;
     	}
   	});
-	render(renderRoutes(), document.getElementById('render-target'));
+  	render(<App />, document.getElementById('render-target'));
 });

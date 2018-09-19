@@ -1,243 +1,114 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { Courses } from '../api/courses.js';
 import { userCourseMap } from '../api/userCourseMap.js';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
-import Loading from '../ui/Loading.js';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import OnlineStatus from './OnlineStatus.js';
+import '../styles/navbar.css';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
 
 	constructor(props){
 		super(props);
-		this.toggle = this.toggle.bind(this);
-    	this.state = {
-      		isOpen: false
-    	};
 	}
 
-	toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
 
 	renderCourse(courseId){
-		if(!Courses.findOne())
-			return 'CAT';
-		return Courses.findOne(courseId).name;
+		return _.findWhere(this.props.allCourseNames, {_id:courseId}).name;
 	}
 
 	renderUserCourseMaps(){
 		let userCourseMaps =  this.props.userCourseMaps;
 		return userCourseMaps.map((ucm) =>(
-			<DropdownItem href="">{this.renderCourse(ucm.course_id)}</DropdownItem>
+			<li key={ucm._id}> <a className="change-course-map">{this.renderCourse(ucm.course_id)} </a></li>
 		));
-	}
+	}	
 
  	render() {
- 		const {loading } = this.props;
-	    return (
-	    	loading ? <Loading /> :
-	    	<div>
-	    		<Navbar color="#363636" light expand="md">
-	    			<NavbarBrand>
-	    				<a href=""><img src="/assets/global/img/ONLINEMOCKS.png" alt="logo" className="logo-default"/></a>
-	    			</NavbarBrand>
-	    		
-		    	{this.props.notSubscribedToCourse ?
-			      	
-				        <Collapse isOpen={this.state.isOpen} navbar>
-				            <Nav className="ml-auto" navbar>
-				              	<UncontrolledDropdown nav inNavbar>
-				                	<DropdownToggle nav caret>{this.props.courseName}</DropdownToggle>
-				                	<DropdownMenu>
-				                		{this.renderUserCourseMaps()}
-				                		<DropdownItem href="">My Courses</DropdownItem>
-				                	</DropdownMenu>
-				              	</UncontrolledDropdown>
-				              	<NavItem>
-				                	<NavLink href="">Learn & Prepare</NavLink>
-				              	</NavItem>
-				              	<UncontrolledDropdown nav inNavbar>
-				                	<DropdownToggle nav caret>
-				                  		Practice & Test
-				                	</DropdownToggle>
-				                	<DropdownMenu right>
-					                	<DropdownItem>
-					                    	OMCATs (Test Series)
-					                  	</DropdownItem>
-				                	</DropdownMenu>
-				              	</UncontrolledDropdown>
-				              	<NavItem>
-				              		<NavLink href="/">Revise & Discuss</NavLink>
-				              	</NavItem>
-				            </Nav>
-				        </Collapse>
-        			
-		  		: ''}
-		  		<Nav className="pullRight">
-		  			<NavItem><AccountsUIWrapper /></NavItem>
-            		<NavItem><OnlineStatus /></NavItem>
-            		</Nav>
-		  		</Navbar>
-	  		</div>
+ 		return (
+	    	<nav className = 'navBackground navbar navbar-default navbar-fixed-top'>
+	    		<div className="container-fluid">
+			    	<div className="navbar-header">
+		                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" 
+		                	aria-expanded="false">
+		                    <span className="sr-only">Toggle navigation</span>
+		                    <span className="icon-bar"></span>
+		                    <span className="icon-bar"></span>
+		                    <span className="icon-bar"></span>
+		                </button>
+		                <Link to="/home" className="navbar-brand">
+		                    <img src="/assets/global/img/ONLINEMOCKS.png" alt="logo" className="logo-default" />
+		                </Link>
+		            </div>
+
+	            	<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			            {this.props.notSubscribedToCourse ?  
+			    		<ul className="nav navbar-nav left_menu">
+		          			<li className="dropdown activeOnBackCourse">
+		              			<a href="#" className="dropdown-toggle d1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		              				{this.props.courseName}
+		              				<span className="caret"></span>
+		              			</a>
+		              			<ul className="dropdown-menu">
+		                			{this.renderUserCourseMaps()}
+		                            <li className="addCourse"><a>My Courses</a></li>
+		              			</ul>
+		          			</li>
+				          	<li className="classic-menu-dropdown my-default-course active">
+				            	<a href="{{home}}"> Learn & Prepare
+				                  <span className="selected"> </span>
+				              	</a>
+				          	</li>
+		          			<li className="classic-menu-dropdown activeOnBack ">
+		                  		<a href="javascript:;" className="dropdown-toggle d1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Practise & Test
+		                      		<span className="caret"></span>
+		                  		</a>
+			                  	<ul className="dropdown-menu">
+			                      <li className="studenttest">
+			                      <a>
+			                          <i className="fa fa-bookmark-o"></i>OMCATs (Test Series)</a>
+			                      </li>
+			                  	</ul>
+		          			</li>
+		          			<li className="classic-menu-dropdown library"><a>Revise & Discuss</a></li>
+		       			</ul>
+		       			: ''
+       					}
+   				
+			       		<ul className="nav navbar-nav navbar-right">
+			   				<AccountsUIWrapper />
+			   				<OnlineStatus />
+			   			</ul>
+   					</div>
+   				</div>
+	  		</nav>
 	    );
   	}
 }
+const allCourseNames = new ReactiveVar();
 const courseName = new ReactiveVar();
-export default withTracker(() =>{
-	let self = this;
- 	Meteor.subscribe('courses');
- 	if(Meteor.user()){
- 	Meteor.call('courseName', Meteor.user().profile.default_course, function(err, res){
- 		if(res){
- 			courseName.set(res);
- 		}
- 	})
- }
+Meteor.call('allCourseNames', function(err, res){
+	if(res){
+		allCourseNames.set(res);
+	}
+});
+ 	
+export default withTracker(() =>{	
+	if(Meteor.user()){
+		console.log('check navbar call');
+ 		Meteor.call('courseName', Meteor.user().profile.default_course, function(err, res){
+	 		if(res){
+	 			courseName.set(res);
+	 		}
+	 	});
+ 	}
 	
 	return {
 		userCourseMaps : userCourseMap.find({user_id : Meteor.userId()}).fetch(),
 		notSubscribedToCourse : Meteor.user(),
-		loading : !Meteor.user(),
-		courseName : courseName.get()
+		courseName : courseName.get(),
+		allCourseNames : allCourseNames.get()
 	};
 })(NavBar);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//* import React, { Component } from 'react';
-// import { withTracker } from 'meteor/react-meteor-data';
-// import ReactDOM from 'react-dom';
-// import { Meteor } from 'meteor/meteor';
-// import { Courses } from '../api/courses.js';
-// import { userCourseMap } from '../api/userCourseMap.js';
-// import {
-//   Collapse,
-//   Navbar,
-//   NavbarToggler,
-//   NavbarBrand,
-//   Nav,
-//   NavItem,
-//   NavLink,
-//   UncontrolledDropdown,
-//   DropdownToggle,
-//   DropdownMenu,
-//   DropdownItem } from 'reactstrap';
-
-// class NavBar extends Component {
-
-// 	constructor(props){
-// 		super(props);
-// 		this.toggle = this.toggle.bind(this);
-//     	this.state = {
-//       		isOpen: false
-//     	};
-// 	}
-
-// 	toggle() {
-//     this.setState({
-//       isOpen: !this.state.isOpen
-//     });
-//   }
-
-// 	renderCourse(courseId){
-// 		if(!Courses.findOne())
-// 			return 'CAT';
-// 		return Courses.findOne(courseId).name;
-// 	}
-
-// 	renderUserCourseMaps(){
-// 		let userCourseMaps =  this.props.userCourseMaps;
-// 		return userCourseMaps.map((ucm) =>(
-// 			<DropdownItem href="">{this.renderCourse(ucm.course_id)}</DropdownItem>
-// 		));
-// 	}
-
-//  	render() {
-// 	    return (
-// 	    	<div>
-// 	    		<Navbar color="light" light expand="md">
-	    		
-// 		    	{this.props.notSubscribedToCourse ?
-			      	
-// 				        <NavbarToggler onClick={this.toggle} />
-// 				        <Collapse isOpen={this.state.isOpen} navbar>
-// 				            <Nav className="ml-auto" navbar>
-// 				              	<UncontrolledDropdown nav inNavbar>
-// 				                	<DropdownToggle nav caret>{this.props.courseName}</DropdownToggle>
-// 				                	<DropdownMenu>{this.renderUserCourseMaps()}</DropdownMenu>
-// 				              	</UncontrolledDropdown>
-// 				              	<NavItem>
-// 				                	<NavLink href="">Learn & Prepare</NavLink>
-// 				              	</NavItem>
-// 				              	<UncontrolledDropdown nav inNavbar>
-// 				                	<DropdownToggle nav caret>
-// 				                  		Practice & Test
-// 				                	</DropdownToggle>
-// 				                	<DropdownMenu right>
-// 					                	<DropdownItem>
-// 					                    	OMCATs (Test Series)
-// 					                  	</DropdownItem>
-// 				                	</DropdownMenu>
-// 				              	</UncontrolledDropdown>
-// 				              	<NavItem>
-// 				              		<NavLink href="/">Revise & Discuss</NavLink>
-// 				              	</NavItem>
-// 				            </Nav>
-// 				        </Collapse>
-        			
-// 		  		: ''}
-// 		  		</Navbar>
-// 	  		</div>
-// 	    );
-//   	}
-// }
-// const courseName = new ReactiveVar();
-// export default withTracker(() =>{
-// 	let self = this;
-// 	Meteor.subscribe('courses');
-// 	Meteor.call(courseName, Meteor.user().profile.default_course, function(err, res){
-// 		if(res)
-// 			courseName.set(res);
-// 	})
-// 	return {
-// 		userCourseMaps : userCourseMap.find({user_id : Meteor.userId()}).fetch(),
-//         currentUser : Meteor.user(),
-//         notSubscribedToCourse : Meteor.user().profile.default_course,
-//     	courseName : courseName.get()
-//     };
-// })(NavBar);

@@ -7,6 +7,6 @@ export default class Loading extends Component {
 
   render() {
     // Just render a placeholder container that will be filled in
-    return <span ref="container">LOADING</span>;
+    return <p>LOADING</p>;
   }
 }
