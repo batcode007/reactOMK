@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import NavBar from './NavBar.js';
 import Footer from './Footer.js';
@@ -9,10 +8,12 @@ import StudentCourseMap from './StudentCourseMap.js';
 import { Router, Route, Switch, NotFoundRoute } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Redirect } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
+
 // App component - represents the whole app
 const browserHistory = createBrowserHistory();
 
-export default class App extends Component {
+class App extends Component {
     
     constructor(props) {
         super(props);
@@ -58,3 +59,26 @@ export default class App extends Component {
         );
     }
 }
+
+export default withTracker(() => {
+
+    if( Meteor.loggingIn() === false ){
+        if (Meteor.user() != undefined ){
+            if ( Meteor.user().profile.default_course === undefined ) {
+                return (
+                    <Redirect to ="/student/choose_course" />
+                )
+            } else{
+                return (
+                    <Redirect to={'/student/course/' + Meteor.user().profile.default_course + "/" + Meteor.user().profile.default_course_map} />
+                );
+            }
+        }
+        else {
+            return (
+                <Redirect to="/home" />
+            );
+        }
+    }
+    return{}
+})(App);

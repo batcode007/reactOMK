@@ -25,14 +25,10 @@ body {
 
             a {
                 transition: all .35s;
-                color: #e77d00
+                
             }
 
-            a:focus,
-            a:hover {
-                color: #eb3812
-            }
-
+            
             p {
                 font-family: "Roboto", sans-serif;
                 font-size: 22px;
@@ -58,9 +54,7 @@ body {
                 padding: 40px 0 0 0;
             }
 
-            aside {
-                padding: 50px 0
-            }
+            
 
             .no-padding {
                 padding: 0

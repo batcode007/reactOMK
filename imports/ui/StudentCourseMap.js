@@ -4,11 +4,36 @@ import { Meteor } from 'meteor/meteor';
 import '../../lib/Util/StudentCourseClass.js';
 import {userCourseMap} from '../../imports/api/userCourseMap.js';
 import '../styles/studentCourseMap.css';
+import Modal from 'react-responsive-modal';
+import StudentCourseMapCards from './StudentCourseMapCards.js';
+import { skillDataObject } from '../../lib/common.js';
 
 class StudentCourseMap extends Component{
+	state = {
+        open: false,
+    };
+
+    onOpenModal = () => {
+
+        this.setState({open:true});
+    }
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
 	constructor(props){
 		super(props);
+	}
+
+	getMeteorData(){
+		// let handle = Meteor.subscribe('courses')
+
+	    // return {
+	    //   todoListLoading: ! handle.ready(), // Use handle to show loading state
+	    //   todoList: TodoLists.findOne(this.props.id),
+	    //   todoListTasks: Tasks.find({listId: this.props.id}).fetch()
+	    // };
 	}
 
 	courseCompletion(){
@@ -51,11 +76,27 @@ class StudentCourseMap extends Component{
 	}
 
 	componentDidMount(){
-		$('body').addClass('overflow_hidden');
+		// $('body').addClass('overflow_hidden');
 		$('body').addClass('studentCourseMap');
 	}
 
+	performanceReportRowHeads(){
+		let t = skillDataObject();
+		console.log('t',JSON.stringify(t));
+		const testNaman = t.map((s) =>
+			<th key={s.name}>{s.name} <i className="fa fa-info-circle" data-toggle="tooltip" title={s.desc} aria-hidden="true"></i></th>
+		);
+		return (
+			<thead>
+                <tr className="topicName"><th>Topic\Skill</th>
+                  	{testNaman}
+                </tr>
+            </thead>
+        )
+	}
+
 	render(){
+		const { open } = this.state;
 		return(
 			<aside>
               <div className="container-fluid">
@@ -74,7 +115,7 @@ class StudentCourseMap extends Component{
                                           {this.renderBlackStars()}
                                       </div>
                                       <button className="skilltopictable">
-                                          <a>
+                                          <a onClick={this.onOpenModal}>
                                               Performance Report
                                           </a>
                                       </button>
@@ -105,7 +146,7 @@ class StudentCourseMap extends Component{
                                   </div>
                                   <div className="milestone_list_wrap">
                                       <div className="milestone_height_wrap">
-                                          studentCourseMapGraph _id=this.course_id user_course_map_id=this._id 
+                                          <StudentCourseMapCards /> 
                                       </div>
                                   </div>
                               </div>
@@ -113,15 +154,60 @@ class StudentCourseMap extends Component{
                       </div>
                   </div>
               </div>
+              <Modal open={open} onClose={this.onCloseModal} center>
+                <div className="modal-header">
+                    <div className="test_name">
+                        <div className="title">
+                            <span>Performance Report</span>
+                        </div>
+                        <div className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><img src="/assets/global/img/close.png" /> </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="modal-body">
+                        <div className="content">
+                            <section className="scoreInformation">
+                              <div className="row">
+                                <div className="col-md-3 col-sm-6 col-xs-12">
+                                  <p><span className="box highscore"></span>Good</p>
+                                </div>
+                                 <div className="col-md-3 col-sm-6 col-xs-12">
+                                  <p><span className="box lowscore"></span>Needs attention</p>
+                                </div>
+                                 <div className="col-md-3 col-sm-6 col-xs-12">
+                                  <p><span className="box mediumscore"></span>Satisfactory</p>
+                                </div>
+                                 <div className="col-md-3 col-sm-6 col-xs-12">
+                                  <p><span className="box notAttempted"></span>Not attempted</p>
+                                </div>
+                              </div>
+                            </section>
+
+                            <table className="table">
+                                {this.performanceReportRowHeads()}
+                                <tbody>
+                                
+                                <tr className = "parentTopic"><td></td>
+                                    
+                                        <td><span className="totalscore scoreClass s.name f}}"></span></td>
+                                    
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+            </Modal>
         	</aside>
 		)
 	}	
 }
 const courseName = new ReactiveVar();
-const coursePerformance= new ReactiveVar();
-const studentCourseObj = new ReactiveVar();
+let coursePerformance= new ReactiveVar();
+let studentCourseObj = new ReactiveVar();
 const courseMapName = new ReactiveVar();
-const tagWiseCompletion = new ReactiveVar();
+let tagWiseCompletion = new ReactiveVar();
 
 export default withTracker(() =>{
 	if(Meteor.user() && userCourseMap.findOne()){

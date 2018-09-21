@@ -1,5 +1,6 @@
 .student{
 	background:#363636;
+	z-index: 999999;
 }
 
 .whiteColor{

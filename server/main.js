@@ -96,14 +96,6 @@ Meteor.publish('myUserCourseMap', function() { //Change this later to user speci
     }
 });
 
-Meteor.publish('courses', function(limit) {
-    var flag = true;
-    flag = typeof limit !== 'undefined' ? true : false;
-    if (this.userId) {
-        return Courses.find();
-    }
-});
-
 Meteor.methods({
 
     allCourseNames(){
@@ -119,6 +111,7 @@ Meteor.methods({
     },
 
     courseMapStructure(courseMapId){
+        console.log('courseMapStructure server check');
         return CourseMap.findOne(courseMapId).course_map_structure;
     },
 
@@ -221,6 +214,10 @@ Meteor.methods({
             };
         }
     },
+
+    studentAvailableCourses(subscribedCourseIds){
+        return Courses.find({_id : {$nin : subscribedCourseIds}}).fetch();
+    }
 });
 
 
